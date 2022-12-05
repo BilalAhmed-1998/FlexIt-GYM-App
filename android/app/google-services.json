@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "214681774458",
+    "project_id": "flexit-1ad68",
+    "storage_bucket": "flexit-1ad68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214681774458:android:51823187ecb693199f8ec3",
+        "android_client_info": {
+          "package_name": "com.example.flexit_gym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214681774458-6mk54l3un1u10frk707ti1cm934ruhdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbw-BFjk7qqeKWtiYHremMmpnj8-DNY6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214681774458-6mk54l3un1u10frk707ti1cm934ruhdl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
