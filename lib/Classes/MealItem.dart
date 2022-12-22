@@ -1,7 +1,7 @@
 class MealItem{
-  String itemTitle, itemDesc;
+  String itemTitle, itemDesc,img;
 
-  MealItem({this.itemTitle, this.itemDesc});
+  MealItem({this.itemTitle, this.itemDesc,this.img});
 
 
 }

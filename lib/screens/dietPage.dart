@@ -1,10 +1,9 @@
-import 'package:flexit_gym/Classes/Meal.dart';
+import 'package:flexit_gym/cards/blueButton.dart';
 import 'package:flexit_gym/cards/circularProgressCard.dart';
-import 'package:flexit_gym/cards/mealCard.dart';
 import 'package:flexit_gym/data.dart';
+import 'package:flexit_gym/screens/dietCardScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class DietPage extends StatefulWidget {
   static const routeName = '/DietPage';
@@ -14,11 +13,9 @@ class DietPage extends StatefulWidget {
 }
 
 class _DietPageState extends State<DietPage> {
-  int current_day = 1;
+  int currentDay = daysNumber[current_day];
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -26,7 +23,7 @@ class _DietPageState extends State<DietPage> {
           Row(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(30, 40, 30, 20),
+                margin: EdgeInsets.fromLTRB(30, 60, 50, 20),
                 child: Column(
                   children: [
                     Text(
@@ -77,7 +74,7 @@ class _DietPageState extends State<DietPage> {
                 ),
               ),
               Icon(
-                Icons.add,
+                CupertinoIcons.minus,
                 color: Colors.black,
                 size: 15,
               ),
@@ -112,15 +109,17 @@ class _DietPageState extends State<DietPage> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 20, bottom: 35),
-            height: 210,
-            width: 210,
+            margin: EdgeInsets.only(top: 40, bottom: 55),
+            height: 240,
+            width: 240,
             child: Stack(children: [
               Container(
-                  height: 210,
-                  width: 210,
+                  height: 240,
+                  width: 240,
                   child: TweenAnimationBuilder<double>(
-                      tween: Tween<double>(begin: 0.0, end: 0.66),
+                      tween: Tween<double>(
+                          begin: 0.0,
+                          end: (food_val + exercise_val) / goal_val),
                       duration: const Duration(milliseconds: 700),
                       builder: (context, value, _) => CircularProgressIndicator(
                             color: Colors.blue,
@@ -128,21 +127,21 @@ class _DietPageState extends State<DietPage> {
                             value: value,
                             strokeWidth: 19.0,
                             semanticsValue:
-                                (goal_val - food_val + exercise_val).toString(),
+                                (goal_val - food_val - exercise_val).toString(),
                             semanticsLabel: 'Remaining',
                           ))),
               Container(
-                height: 210,
-                width: 210,
+                height: 240,
+                width: 240,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      (goal_val - food_val + exercise_val).toString(),
+                      (goal_val - food_val - exercise_val).toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 35,
+                        fontSize: 45,
                       ),
                     ),
                     Text(
@@ -159,7 +158,7 @@ class _DietPageState extends State<DietPage> {
             ]),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: EdgeInsets.symmetric(horizontal: 10,vertical: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -172,72 +171,77 @@ class _DietPageState extends State<DietPage> {
               ],
             ),
           ),
-          Container(
-            height: 55,
-            margin: EdgeInsets.only(top: 25, bottom: 10),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 1.0, color: Colors.grey.shade300),
-                bottom: BorderSide(width: 1.0, color: Colors.grey.shade300),
-              ),
-              color: Colors.white,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (current_day != 0) {
-                        current_day--;
-                      }
-                    });
-                  },
-                  child: current_day != 0
-                      ? Icon(
-                          CupertinoIcons.chevron_left_circle,
-                          color: Colors.black,
-                          size: 22,
-                        )
-                      : Container(),
-                ),
-                Text(
-                  meals.keys.elementAt(current_day),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 17,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (current_day != 5) {
-                        current_day++;
-                      }
-                    });
-                  },
-                  child: current_day != 5
-                      ? Icon(
-                          CupertinoIcons.chevron_right_circle,
-                          color: Colors.black,
-                          size: 22,
-                        )
-                      : Container(),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-                itemCount: meals[meals.keys.elementAt(current_day)].length,
-                itemBuilder: (BuildContext context, int index) {
-                  Meal meal =
-                      meals[meals.keys.elementAt(current_day)].elementAt(index);
-                  return MealCard(name: meal.name, mealItems: meal.mealItems);
-                }),
-          )
+          SizedBox(height: 10,),
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, DietCardScreen.routeName);
+            },
+              child: BlueButton(text: "Check today's Meals",))
+          // Container(
+          //   height: 55,
+          //   margin: EdgeInsets.only(top: 25, bottom: 10),
+          //   padding: EdgeInsets.symmetric(horizontal: 10),
+          //   decoration: BoxDecoration(
+          //     border: Border(
+          //       top: BorderSide(width: 1.0, color: Colors.grey.shade300),
+          //       bottom: BorderSide(width: 1.0, color: Colors.grey.shade300),
+          //     ),
+          //     color: Colors.white,
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       InkWell(
+          //         onTap: () {
+          //           setState(() {
+          //             if (currentDay != 0) {
+          //               currentDay--;
+          //             }
+          //           });
+          //         },
+          //         child: currentDay != 0
+          //             ? Icon(
+          //                 CupertinoIcons.chevron_left_circle,
+          //                 color: Colors.black,
+          //                 size: 22,
+          //               )
+          //             : Container(),
+          //       ),
+          //       Text(
+          //         meals.keys.elementAt(currentDay),
+          //         style: TextStyle(
+          //           color: Colors.black,
+          //           fontSize: 17,
+          //         ),
+          //       ),
+          //       InkWell(
+          //         onTap: () {
+          //           setState(() {
+          //             if (currentDay != 5) {
+          //               currentDay++;
+          //             }
+          //           });
+          //         },
+          //         child: currentDay != 5
+          //             ? Icon(
+          //                 CupertinoIcons.chevron_right_circle,
+          //                 color: Colors.black,
+          //                 size: 22,
+          //               )
+          //             : Container(),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 200,
+          //   child: ListView.builder(
+          //       itemCount: 4,
+          //       itemBuilder: (BuildContext context, int index) {
+          //         Meal meal = meals[meals.keys.elementAt(currentDay)].elementAt(index);
+          //         return MealCard(name: meal.name, mealItems: meal.mealItems,currentDay: daysNumber.keys.elementAt(currentDay),mealNo: index);
+          //       }),
+          // )
         ],
       ),
     );

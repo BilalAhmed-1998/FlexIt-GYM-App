@@ -17,7 +17,7 @@ class BlueButton extends StatelessWidget {
       height: 55,
       width: width,
       child: Text(
-        'Find your ideal regime',
+        text,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           color: Colors.white,

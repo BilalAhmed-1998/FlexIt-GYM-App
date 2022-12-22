@@ -1,8 +1,8 @@
-import 'package:flexit_gym/screens/homePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/authService.dart';
+import 'bmiCalculatorPage.dart';
 
 class signUpScreen extends StatefulWidget {
   static const routeName = '/signUpScreen';
@@ -178,7 +178,7 @@ class _signUpScreenState extends State<signUpScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text("a verification email has been sent!")));
                     if(FirebaseAuth.instance.currentUser!=null){
-                      Navigator.pushNamed(context, homePage.routeName);
+                      Navigator.pushNamed(context, BmiCalculatorPage.routeName);
 
                     }
                   } else {

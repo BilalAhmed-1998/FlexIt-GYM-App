@@ -208,6 +208,9 @@ class _loginScreenState extends State<loginScreen> {
                   await AuthService().signInWithEmailPassword(
                       context, emailController.text, passwordController.text);
                   if (FirebaseAuth.instance.currentUser != null) {
+
+
+
                     Navigator.pushNamed(context, homePage.routeName);
                   }
                 },
