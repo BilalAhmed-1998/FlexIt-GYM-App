@@ -214,7 +214,8 @@ class _loginScreenState extends State<loginScreen> {
                     Navigator.pushNamed(context, homePage.routeName);
                   }
                 },
-                child: Container(
+                child:
+                Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Color(0xff23A6F0),
