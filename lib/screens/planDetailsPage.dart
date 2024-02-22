@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Classes/Plan.dart';
 
@@ -69,18 +68,18 @@ class _PlanDetailPageState extends State<PlanDetailPage> {
                       children: [
                         for (var i = 0; i < widget.plan.traits.length; i++)
                           Text(
-                            '#' + widget.plan.traits[i] + ' ',
+                            '#${widget.plan.traits[i]} ',
                             style: TextStyle(
                                 height: 1.8, color: Colors.black, fontSize: 12),
                           )
                       ],
                     ),
                     Text(
-                      widget.plan.days.toString() + ' days',
+                      '${widget.plan.days} days',
                       style: TextStyle(color: Colors.black, height: 1.5),
                     ),
                     Text(
-                      'Strength Level ' + widget.plan.strengthLevel.toString(),
+                      'Strength Level ${widget.plan.strengthLevel}',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
